@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'maven'
+apply plugin: 'jetty'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+version = '1.0'
+group = 'br.com.esafer'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+ 
+configurations {
+	provided
+	runtime
+    testCompile
+}
+
+sourceSets {
+	main { compileClasspath += configurations.provided }
+	test { runtimeClasspath += configurations.provided }
+}
+ 
+eclipse.classpath.plusConfigurations += [configurations.provided]
+
+dependencies {
+
+	provided 'javax:javaee-web-api:7.0'
+
+	compile 'org.springframework:spring-webmvc:4.0.7.RELEASE',
+			'com.fasterxml.jackson.core:jackson-databind:2.3.4',
+			'org.springframework.data:spring-data-jpa:1.6.4.RELEASE',
+			'org.hibernate:hibernate-entitymanager:4.3.7.Final',
+			'org.hibernate:hibernate-validator:5.0.3.Final',
+			'org.hsqldb:hsqldb:2.3.2',
+            'org.apache.commons:commons-lang3:3.3.2',
+            'ch.qos.logback:logback-classic:1.1.2',
+            'org.slf4j:jcl-over-slf4j:1.7.7',
+            'org.psjava:psjava:0.1.17'
+            
+	testCompile 'junit:junit:4.11',
+                'org.springframework:spring-test:4.0.7.RELEASE'
+}
