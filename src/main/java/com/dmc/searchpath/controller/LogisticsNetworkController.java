@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,8 @@ import com.dmc.searchpath.repository.LogisticsNetworkMapRepository;
  * @author Fabio E. Pavão
  * @since 10/11/2014
  */
-@RestController("map")
+@RestController
+@RequestMapping("map")
 public class LogisticsNetworkController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -32,9 +34,8 @@ public class LogisticsNetworkController {
 		this.lnmRepository = lnmRepository;
 	}
 	
-	@RequestMapping(value = "/create", consumes = "application/json", 
-					produces = "application/json", method = POST)
-	public ResponseEntity<String> create(LogisticsNetworkMap map) {
+	@RequestMapping(consumes = "application/json", produces = "application/json", method = POST)
+	public ResponseEntity<String> create(@RequestBody LogisticsNetworkMap map) {
 		
 		try {
 			lnmRepository.save(map);
@@ -47,9 +48,8 @@ public class LogisticsNetworkController {
 		return new ResponseEntity<String>(HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/update", consumes = "application/json", 
-			produces = "application/json", method = PUT)
-	public ResponseEntity<String> update(LogisticsNetworkMap map) {
+	@RequestMapping(consumes = "application/json", produces = "application/json", method = PUT)
+	public ResponseEntity<String> update(@RequestBody LogisticsNetworkMap map) {
 		
 		try {
 			lnmRepository.save(map);
