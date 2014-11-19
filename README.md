@@ -46,8 +46,7 @@ curl -X GET -H "Content-Type: application/json" -d '{"mapName":"SP","from":"A", 
 Retorno
 ```
 {
-  "places":[
-    "A","B","D"],
+  "places":["A","B","D"],
   "cost":6.25
 }
 ```
