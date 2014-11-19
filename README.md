@@ -27,3 +27,27 @@ Abaixo lista de frameworks e tecnologias utilizadas:
 
 ## Quick Start
 Para iniciar a aplicação basta digitar: gradle jettyRun
+
+## Testes
+A aplicação estará disponível em http://localhost:8080/searchpath.
+
+O retorno das requisições é baseado no protocolo HTTP.
+
+Exemplo de POST para criação de novo mapa utilizando curl:
+
+```
+url -X POST -H "Content-Type: application/json" -d '{"name":"SP","routes":[{"origin":"A", "destination":"B", "distance":"10"}, {"origin":"B", "destination":"D", "distance":"15"}, {"origin":"A", "destination":"C", "distance":"20"}, {"origin":"C", "destination":"D", "distance":"50"}, {"origin":"B", "destination":"E", "distance":"30"}]}' http://localhost:8080/searchpath/map
+```
+
+Exemplo de GET para cálculo da rota de entrega e seu custo utilizando curl:
+```
+curl -X GET -H "Content-Type: application/json" -d '{"mapName":"SP","from":"A", "to":"D", "autonomy":"10", "fuelValue":"2.50"}' http://localhost:8080/searchpath/shipment/path
+```
+Retorno
+```
+{
+  "places":[
+    "A","B","D"],
+  "cost":6.25
+}
+```
