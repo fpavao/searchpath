@@ -9,16 +9,19 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 /**
  * @author Fabio E. Pavão
  * @since 10/11/2014
  */
 @Entity
+@SelectBeforeUpdate
 public class LogisticsNetworkMap implements Serializable {
 	
 	/**
@@ -29,7 +32,7 @@ public class LogisticsNetworkMap implements Serializable {
 	@Id
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Route> routes;
 
 	/**

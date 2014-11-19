@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -24,7 +25,8 @@ public class Route implements Serializable {
 	 */
 	private static final long serialVersionUID = -5252782723947616968L;
 
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String origin;
