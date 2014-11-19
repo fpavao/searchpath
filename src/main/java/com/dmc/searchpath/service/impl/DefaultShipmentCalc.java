@@ -65,7 +65,7 @@ public class DefaultShipmentCalc implements ShipmentCalc {
 			LogisticsNetworkMap map = lnmRepository.findOne(mapName);
 			
 			if (map == null)
-				throw new NoMapFoundException("Map" + mapName + "not found.");
+				throw new NoMapFoundException("Map " + mapName + " not found.");
 		
 			IntegerNumberSystem NS = IntegerNumberSystem.getInstance();
 			
@@ -90,10 +90,10 @@ public class DefaultShipmentCalc implements ShipmentCalc {
 			throw new NoMapFoundException(e);
 		} catch (NoRouteFoundException e) {
 			throw new NoRouteFoundException(e);
+		} catch (RuntimeException e) {
+			throw new IllegalArgumentException(e);			
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			if (e.getMessage().contains("key is not int the map"));
-				throw new IllegalArgumentException(e);
 		}
 		
 		return shipmentData;
